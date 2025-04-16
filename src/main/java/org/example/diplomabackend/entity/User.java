@@ -1,6 +1,5 @@
 package org.example.diplomabackend.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -15,6 +14,7 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "users")
 public class User {
 
     @Id
@@ -37,4 +37,19 @@ public class User {
 
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PersonalEvent> personalEvents;
+
+    @ManyToOne
+    @JoinColumn(name = "university_id")
+    private University university;
+
+    public User(String firstName, String lastName, String email, String password, LocalDateTime createdAt, Group group, List<PersonalEvent> personalEvents, University university) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.password = password;
+        this.createdAt = createdAt;
+        this.group = group;
+        this.personalEvents = personalEvents;
+        this.university = university;
+    }
 }

@@ -14,6 +14,7 @@ import java.time.LocalTime;
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "personal_events")
 public class PersonalEvent {
 
     @Id
@@ -26,7 +27,7 @@ public class PersonalEvent {
 
     private LocalDate eventDate;
 
-    private LocalTime eventSTime;
+    private LocalTime eventStartTime;
 
     private Integer eventDuration;
 
@@ -38,7 +39,7 @@ public class PersonalEvent {
         this.eventTitle = eventTitle;
         this.eventType = eventType;
         this.eventDate = eventDate;
-        this.eventSTime = eventSTime;
+        this.eventStartTime = eventSTime;
         this.eventDuration = eventDuration;
         this.user = user;
     }
