@@ -20,10 +20,11 @@ public class Group {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
     private String groupNumber;
 
     @OneToMany(mappedBy = "group", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<User> users = new ArrayList<>();
+    private List<User> users = new ArrayList<>();
 
     @ManyToOne
     @JoinColumn(name = "university_id")

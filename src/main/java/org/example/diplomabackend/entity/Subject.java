@@ -24,8 +24,8 @@ public class Subject {
     private String name;
 
     @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<Lesson> lessons = new ArrayList<>();
+    private List<Lesson> lessons = new ArrayList<>();
 
     @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    List<Task> tasks = new ArrayList<>();
+    private List<Task> tasks = new ArrayList<>();
 }
