@@ -1,0 +1,38 @@
+package org.example.diplomabackend.controller.dto.response;
+
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+import org.example.diplomabackend.entity.PersonalEvent;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
+
+@Getter
+@Setter
+@AllArgsConstructor
+public class PersonalEventResponseDTO {
+    private Long id;
+
+    private String eventTitle;
+
+    private String eventType;
+
+    private LocalDate eventDate;
+
+    private LocalTime eventStartTime;
+
+    private Integer eventDuration;
+
+    private UserResponseDTO user;
+
+    public PersonalEventResponseDTO(PersonalEvent personalEvent) {
+        this.id = personalEvent.getId();
+        this.eventTitle = personalEvent.getEventTitle();
+        this.eventType = personalEvent.getEventType();
+        this.eventDate = personalEvent.getEventDate();
+        this.eventStartTime = personalEvent.getEventStartTime();
+        this.eventDuration = personalEvent.getEventDuration();
+        this.user = new UserResponseDTO(personalEvent.getUser());
+    }
+}

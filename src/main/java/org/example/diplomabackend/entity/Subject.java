@@ -28,4 +28,10 @@ public class Subject {
 
     @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Task> tasks = new ArrayList<>();
+
+    public Subject(String name, List<Lesson> lessons, List<Task> tasks) {
+        this.name = name;
+        this.lessons = lessons;
+        this.tasks = tasks;
+    }
 }
