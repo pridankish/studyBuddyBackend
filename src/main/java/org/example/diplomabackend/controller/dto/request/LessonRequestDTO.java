@@ -2,7 +2,6 @@ package org.example.diplomabackend.controller.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.example.diplomabackend.entity.Schedule;
 import org.example.diplomabackend.entity.Subject;
 
 import java.time.LocalDate;
@@ -14,7 +13,7 @@ public class LessonRequestDTO {
 
     private LocalDate lessonDate;
 
-    private Schedule schedule;
+    private ScheduleRequestDTO schedule;
 
     private Subject subject;
 

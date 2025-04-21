@@ -4,7 +4,10 @@ import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.GroupRequestDTO;
 import org.example.diplomabackend.controller.dto.response.GroupResponseDTO;
 import org.example.diplomabackend.entity.Group;
+import org.example.diplomabackend.entity.Schedule;
+import org.example.diplomabackend.entity.University;
 import org.example.diplomabackend.service.GroupService;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,8 +37,8 @@ public class GroupController {
                 new Group (
                         groupRequestDTO.getGroupNumber(),
                         groupRequestDTO.getUsers(),
-                        groupRequestDTO.getUniversity(),
-                        groupRequestDTO.getSchedule()
+                        new University(groupRequestDTO.getUniversity()),
+                        new Schedule(groupRequestDTO.getSchedule())
                 )
         );
         return new GroupResponseDTO(savedGroup);
@@ -50,8 +53,8 @@ public class GroupController {
                 new Group (
                         groupRequestDTO.getGroupNumber(),
                         groupRequestDTO.getUsers(),
-                        groupRequestDTO.getUniversity(),
-                        groupRequestDTO.getSchedule()
+                        new University(groupRequestDTO.getUniversity()),
+                        new Schedule(groupRequestDTO.getSchedule())
                 ), id);
 
         return new GroupResponseDTO(updatedGroup);

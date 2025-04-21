@@ -2,8 +2,6 @@ package org.example.diplomabackend.controller.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.example.diplomabackend.entity.Schedule;
-import org.example.diplomabackend.entity.University;
 import org.example.diplomabackend.entity.User;
 
 import java.util.ArrayList;
@@ -17,7 +15,7 @@ public class GroupRequestDTO {
 
     private List<User> users = new ArrayList<>();
 
-    private University university;
+    private UniversityRequestDTO university;
 
-    private Schedule schedule;
+    private ScheduleRequestDTO schedule;
 }

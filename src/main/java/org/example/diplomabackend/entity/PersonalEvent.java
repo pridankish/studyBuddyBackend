@@ -5,9 +5,11 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.example.diplomabackend.controller.dto.request.PersonalEventRequestDTO;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.List;
 
 @Entity
 @ToString
@@ -42,5 +44,14 @@ public class PersonalEvent {
         this.eventStartTime = eventSTime;
         this.eventDuration = eventDuration;
         this.user = user;
+    }
+
+    public PersonalEvent(PersonalEventRequestDTO personalEventRequestDTO) {
+        this.eventTitle = personalEventRequestDTO.getEventTitle();
+        this.eventType = personalEventRequestDTO.getEventType();
+        this.eventDate = personalEventRequestDTO.getEventDate();
+        this.eventStartTime = personalEventRequestDTO.getEventStartTime();
+        this.eventDuration = personalEventRequestDTO.getEventDuration();
+        this.user = new User(personalEventRequestDTO.getUser());
     }
 }

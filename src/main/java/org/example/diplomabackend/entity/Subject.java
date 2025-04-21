@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.example.diplomabackend.controller.dto.request.SubjectRequestDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +34,11 @@ public class Subject {
         this.name = name;
         this.lessons = lessons;
         this.tasks = tasks;
+    }
+
+    public Subject(SubjectRequestDTO subject) {
+        this.name = subject.getName();
+        this.lessons = new ArrayList<>();
+        this.tasks = new ArrayList<>();
     }
 }

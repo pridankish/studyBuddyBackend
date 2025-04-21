@@ -2,9 +2,6 @@ package org.example.diplomabackend.controller.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.example.diplomabackend.entity.Group;
-import org.example.diplomabackend.entity.PersonalEvent;
-import org.example.diplomabackend.entity.University;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -23,9 +20,9 @@ public class UserRequestDTO {
 
     private LocalDateTime createdAt;
 
-    private Group group;
+    private GroupRequestDTO group;
 
-    private List<PersonalEvent> personalEvents;
+    private List<PersonalEventRequestDTO> personalEvents;
 
-    private University university;
+    private UniversityRequestDTO university;
 }

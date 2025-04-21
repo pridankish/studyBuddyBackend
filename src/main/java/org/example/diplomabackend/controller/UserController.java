@@ -3,6 +3,9 @@ package org.example.diplomabackend.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.UserRequestDTO;
 import org.example.diplomabackend.controller.dto.response.UserResponseDTO;
+import org.example.diplomabackend.entity.Group;
+import org.example.diplomabackend.entity.PersonalEvent;
+import org.example.diplomabackend.entity.University;
 import org.example.diplomabackend.entity.User;
 import org.example.diplomabackend.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -38,9 +41,11 @@ public class UserController {
                         userRequestDTO.getEmail(),
                         userRequestDTO.getPassword(),
                         userRequestDTO.getCreatedAt(),
-                        userRequestDTO.getGroup(),
-                        userRequestDTO.getPersonalEvents(),
-                        userRequestDTO.getUniversity()
+                        new Group(userRequestDTO.getGroup()),
+                        userRequestDTO.getPersonalEvents().stream()
+                                .map(PersonalEvent::new)
+                                .collect(Collectors.toList()),
+                        new University(userRequestDTO.getUniversity())
                 )
         );
         return new UserResponseDTO(savedUser);
@@ -58,9 +63,11 @@ public class UserController {
                         userRequestDTO.getEmail(),
                         userRequestDTO.getPassword(),
                         userRequestDTO.getCreatedAt(),
-                        userRequestDTO.getGroup(),
-                        userRequestDTO.getPersonalEvents(),
-                        userRequestDTO.getUniversity()
+                        new Group(userRequestDTO.getGroup()),
+                        userRequestDTO.getPersonalEvents().stream()
+                                .map(PersonalEvent::new)
+                                .collect(Collectors.toList()),
+                        new University(userRequestDTO.getUniversity())
                 ), id);
         return new UserResponseDTO(updatedUser);
     }

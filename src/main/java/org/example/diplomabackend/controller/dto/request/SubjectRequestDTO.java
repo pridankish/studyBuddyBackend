@@ -14,7 +14,7 @@ public class SubjectRequestDTO {
 
     private String name;
 
-    private List<Lesson> lessons = new ArrayList<>();
+    private List<LessonRequestDTO> lessons = new ArrayList<>();
 
-    private List<Task> tasks = new ArrayList<>();
+    private List<TaskRequestDTO> tasks = new ArrayList<>();
 }

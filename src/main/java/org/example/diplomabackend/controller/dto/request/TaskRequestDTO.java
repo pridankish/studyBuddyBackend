@@ -18,5 +18,5 @@ public class TaskRequestDTO {
 
     private Boolean isCompleted;
 
-    private Subject subject;
+    private SubjectRequestDTO subject;
 }

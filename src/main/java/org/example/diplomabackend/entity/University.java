@@ -5,6 +5,8 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.example.diplomabackend.controller.dto.request.UniversityRequestDTO;
+import org.example.diplomabackend.controller.dto.request.UserRequestDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -33,5 +35,11 @@ public class University {
         this.universityName = universityName;
         this.users = users;
         this.groups = groups;
+    }
+
+    public University(UniversityRequestDTO university) {
+        this.universityName = university.getUniversityName();
+        this.users = new ArrayList<>();
+        this.groups = new ArrayList<>();
     }
 }

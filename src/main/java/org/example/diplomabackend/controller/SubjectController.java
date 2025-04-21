@@ -3,7 +3,9 @@ package org.example.diplomabackend.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.SubjectRequestDTO;
 import org.example.diplomabackend.controller.dto.response.SubjectResponseDTO;
+import org.example.diplomabackend.entity.Lesson;
 import org.example.diplomabackend.entity.Subject;
+import org.example.diplomabackend.entity.Task;
 import org.example.diplomabackend.service.SubjectService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -34,8 +36,12 @@ public class SubjectController {
         var savedSubject = subjectService.addNew(
                 new Subject(
                         subjectRequestDTO.getName(),
-                        subjectRequestDTO.getLessons(),
-                        subjectRequestDTO.getTasks()
+                        subjectRequestDTO.getLessons().stream()
+                                .map(Lesson::new)
+                                .collect(Collectors.toList()),
+                        subjectRequestDTO.getTasks().stream()
+                                .map(Task::new)
+                                .collect(Collectors.toList())
                 )
         );
         return new SubjectResponseDTO(savedSubject);
@@ -49,8 +55,12 @@ public class SubjectController {
         var updatedSubject = subjectService.update(
                 new Subject(
                         subjectRequestDTO.getName(),
-                        subjectRequestDTO.getLessons(),
-                        subjectRequestDTO.getTasks()
+                        subjectRequestDTO.getLessons().stream()
+                                .map(Lesson::new)
+                                .collect(Collectors.toList()),
+                        subjectRequestDTO.getTasks().stream()
+                                .map(Task::new)
+                                .collect(Collectors.toList())
                 ), id);
         return new SubjectResponseDTO(updatedSubject);
     }

@@ -3,6 +3,7 @@ package org.example.diplomabackend.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.TaskRequestDTO;
 import org.example.diplomabackend.controller.dto.response.TaskResponseDTO;
+import org.example.diplomabackend.entity.Subject;
 import org.example.diplomabackend.entity.Task;
 import org.example.diplomabackend.service.TaskService;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class TaskController {
                         taskRequestDTO.getDeadline(),
                         taskRequestDTO.getDuration(),
                         taskRequestDTO.getIsCompleted(),
-                        taskRequestDTO.getSubject()
+                        new Subject(taskRequestDTO.getSubject())
                 )
         );
         return new TaskResponseDTO(savedTask);
@@ -54,7 +55,7 @@ public class TaskController {
                         taskRequestDTO.getDeadline(),
                         taskRequestDTO.getDuration(),
                         taskRequestDTO.getIsCompleted(),
-                        taskRequestDTO.getSubject()
+                        new Subject(taskRequestDTO.getSubject())
                 ), id);
         return new TaskResponseDTO(updatedTask);
     }

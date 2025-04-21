@@ -14,7 +14,7 @@ public class UniversityRequestDTO {
 
     private String universityName;
 
-    private List<User> users = new ArrayList<>();
+    private List<UserRequestDTO> users = new ArrayList<>();
 
-    private List<Group> groups = new ArrayList<>();
+    private List<GroupRequestDTO> groups = new ArrayList<>();
 }

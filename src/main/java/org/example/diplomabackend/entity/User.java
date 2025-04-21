@@ -5,8 +5,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.example.diplomabackend.controller.dto.request.UserRequestDTO;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -51,5 +53,16 @@ public class User {
         this.group = group;
         this.personalEvents = personalEvents;
         this.university = university;
+    }
+
+    public User(UserRequestDTO userRequestDTO) {
+        this.firstName = userRequestDTO.getFirstName();
+        this.lastName = userRequestDTO.getLastName();
+        this.email = userRequestDTO.getEmail();
+        this.password = userRequestDTO.getPassword();
+        this.createdAt = LocalDateTime.now();
+        this.group = new Group(userRequestDTO.getGroup());
+        this.personalEvents = new ArrayList<>();
+        this.university = new University(userRequestDTO.getUniversity());
     }
 }

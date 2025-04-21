@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.PersonalEventRequestDTO;
 import org.example.diplomabackend.controller.dto.response.PersonalEventResponseDTO;
 import org.example.diplomabackend.entity.PersonalEvent;
+import org.example.diplomabackend.entity.User;
 import org.example.diplomabackend.service.PersonalEventsService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -37,7 +38,7 @@ public class PersonalEventController {
                         personalEventRequestDTO.getEventDate(),
                         personalEventRequestDTO.getEventStartTime(),
                         personalEventRequestDTO.getEventDuration(),
-                        personalEventRequestDTO.getUser()
+                        new User(personalEventRequestDTO.getUser())
                 )
         );
         return new PersonalEventResponseDTO(savedPersonalEvent);
@@ -55,7 +56,7 @@ public class PersonalEventController {
                         personalEventRequestDTO.getEventDate(),
                         personalEventRequestDTO.getEventStartTime(),
                         personalEventRequestDTO.getEventDuration(),
-                        personalEventRequestDTO.getUser()
+                        new User(personalEventRequestDTO.getUser())
                 ), id);
         return new PersonalEventResponseDTO(updatedPersonalEvent);
     }

@@ -2,11 +2,14 @@ package org.example.diplomabackend.controller.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.example.diplomabackend.entity.Group;
+
+import java.util.List;
 
 @Getter
 @Setter
 public class ScheduleRequestDTO {
 
-    private Group group;
+    private GroupRequestDTO group;
+
+    private List<LessonRequestDTO> lessons;
 }

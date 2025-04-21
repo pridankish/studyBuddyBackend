@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.example.diplomabackend.controller.dto.request.GroupRequestDTO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,7 +32,6 @@ public class Group {
     private University university;
 
     @OneToOne
-    @JoinColumn(name = "schedule_id")
     private Schedule schedule;
 
     public Group(String groupNumber, List<User> users, University university, Schedule schedule) {
@@ -39,5 +39,11 @@ public class Group {
         this.users = users;
         this.university = university;
         this.schedule = schedule;
+    }
+
+    public Group(GroupRequestDTO group) {
+        this.groupNumber = group.getGroupNumber();
+        this.users = group.getUsers();
+        this.university = new University(group.getUniversity());
     }
 }

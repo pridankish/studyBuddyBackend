@@ -3,6 +3,7 @@ package org.example.diplomabackend.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.ScheduleRequestDTO;
 import org.example.diplomabackend.controller.dto.response.ScheduleResponseDTO;
+import org.example.diplomabackend.entity.Group;
 import org.example.diplomabackend.entity.Schedule;
 import org.example.diplomabackend.service.ScheduleService;
 import org.springframework.http.ResponseEntity;
@@ -32,7 +33,7 @@ public class ScheduleController {
     ) {
         var savedSchedule = scheduleService.addNew(
                 new Schedule(
-                        scheduleRequestDTO.getGroup()
+                        new Group(scheduleRequestDTO.getGroup())
                 )
         );
         return new ScheduleResponseDTO(savedSchedule);
@@ -45,7 +46,7 @@ public class ScheduleController {
     ) {
         var updatedSchedule = scheduleService.update(
                 new Schedule(
-                        scheduleRequestDTO.getGroup()
+                        new Group(scheduleRequestDTO.getGroup())
                 ), id);
         return new ScheduleResponseDTO(updatedSchedule);
     }
