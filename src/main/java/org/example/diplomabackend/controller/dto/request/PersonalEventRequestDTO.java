@@ -2,7 +2,6 @@ package org.example.diplomabackend.controller.dto.request;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.example.diplomabackend.entity.User;
 
 import java.time.LocalDate;
 import java.time.LocalTime;

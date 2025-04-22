@@ -3,7 +3,6 @@ package org.example.diplomabackend.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.TaskRequestDTO;
 import org.example.diplomabackend.controller.dto.response.TaskResponseDTO;
-import org.example.diplomabackend.entity.Subject;
 import org.example.diplomabackend.entity.Task;
 import org.example.diplomabackend.service.SubjectService;
 import org.example.diplomabackend.service.TaskService;

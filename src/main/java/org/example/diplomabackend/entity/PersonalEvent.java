@@ -45,13 +45,4 @@ public class PersonalEvent {
         this.eventDuration = eventDuration;
         this.user = user;
     }
-
-    public PersonalEvent(PersonalEventRequestDTO personalEventRequestDTO) {
-        this.eventTitle = personalEventRequestDTO.getEventTitle();
-        this.eventType = personalEventRequestDTO.getEventType();
-        this.eventDate = personalEventRequestDTO.getEventDate();
-        this.eventStartTime = personalEventRequestDTO.getEventStartTime();
-        this.eventDuration = personalEventRequestDTO.getEventDuration();
-//        this.user = new User(personalEventRequestDTO.getUser());
-    }
 }

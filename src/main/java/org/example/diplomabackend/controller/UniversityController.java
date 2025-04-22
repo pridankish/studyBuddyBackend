@@ -3,9 +3,7 @@ package org.example.diplomabackend.controller;
 import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.UniversityRequestDTO;
 import org.example.diplomabackend.controller.dto.response.UniversityResponseDTO;
-import org.example.diplomabackend.entity.Group;
 import org.example.diplomabackend.entity.University;
-import org.example.diplomabackend.entity.User;
 import org.example.diplomabackend.service.UniversityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,12 +34,6 @@ public class UniversityController {
         var savedUniversity = universityService.addNew(
                 new University(
                         universityRequestDTO.getUniversityName()
-//                        universityRequestDTO.getUsers().stream()
-//                                .map(User::new)
-//                                .collect(Collectors.toList()),
-//                        universityRequestDTO.getGroups().stream()
-//                                .map(Group::new)
-//                                .collect(Collectors.toList())
                 )
         );
         return new UniversityResponseDTO(savedUniversity);
@@ -55,12 +47,6 @@ public class UniversityController {
         var updatedUniversity = universityService.update(
                 new University(
                         universityRequestDTO.getUniversityName()
-//                        universityRequestDTO.getUsers().stream()
-//                                .map(User::new)
-//                                .collect(Collectors.toList()),
-//                        universityRequestDTO.getGroups().stream()
-//                                .map(Group::new)
-//                                .collect(Collectors.toList())
                 ), id);
         return new UniversityResponseDTO(updatedUniversity);
     }

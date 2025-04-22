@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.example.diplomabackend.controller.dto.request.LessonRequestDTO;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -49,13 +48,4 @@ public class Lesson {
         this.startTime = startTime;
         this.endTime = endTime;
     }
-
-//    public Lesson(LessonRequestDTO lessonRequestDTO) {
-//        this.lessonDate = lessonRequestDTO.getLessonDate();
-//        this.schedule = new Schedule(lessonRequestDTO.getSchedule());
-//        this.auditoryNumber = lessonRequestDTO.getAuditoryNumber();
-//        this.lessonType = lessonRequestDTO.getLessonType();
-//        this.startTime = lessonRequestDTO.getStartTime();
-//        this.endTime = lessonRequestDTO.getEndTime();
-//    }
 }

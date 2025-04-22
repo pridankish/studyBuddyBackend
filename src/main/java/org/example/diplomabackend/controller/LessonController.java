@@ -7,7 +7,6 @@ import org.example.diplomabackend.entity.Lesson;
 import org.example.diplomabackend.service.GroupService;
 import org.example.diplomabackend.service.LessonService;
 import org.example.diplomabackend.service.SubjectService;
-import org.example.diplomabackend.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
