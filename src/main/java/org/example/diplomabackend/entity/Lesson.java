@@ -25,8 +25,8 @@ public class Lesson {
     private LocalDate lessonDate;
 
     @ManyToOne
-    @JoinColumn(name = "schedule_id")
-    private Schedule schedule;
+    @JoinColumn(name = "group_id")
+    private Group group;
 
     @ManyToOne
     @JoinColumn(name = "subject_id")
@@ -40,21 +40,22 @@ public class Lesson {
 
     private LocalTime endTime;
 
-    public Lesson(LocalDate lessonDate, Schedule schedule, String auditoryNumber, String lessonType, LocalTime startTime, LocalTime endTime) {
+    public Lesson(LocalDate lessonDate, Group group, Subject subject, String auditoryNumber, String lessonType, LocalTime startTime, LocalTime endTime) {
         this.lessonDate = lessonDate;
-        this.schedule = schedule;
+        this.group = group;
+        this.subject = subject;
         this.auditoryNumber = auditoryNumber;
         this.lessonType = lessonType;
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
-    public Lesson(LessonRequestDTO lessonRequestDTO) {
-        this.lessonDate = lessonRequestDTO.getLessonDate();
-        this.schedule = new Schedule(lessonRequestDTO.getSchedule());
-        this.auditoryNumber = lessonRequestDTO.getAuditoryNumber();
-        this.lessonType = lessonRequestDTO.getLessonType();
-        this.startTime = lessonRequestDTO.getStartTime();
-        this.endTime = lessonRequestDTO.getEndTime();
-    }
+//    public Lesson(LessonRequestDTO lessonRequestDTO) {
+//        this.lessonDate = lessonRequestDTO.getLessonDate();
+//        this.schedule = new Schedule(lessonRequestDTO.getSchedule());
+//        this.auditoryNumber = lessonRequestDTO.getAuditoryNumber();
+//        this.lessonType = lessonRequestDTO.getLessonType();
+//        this.startTime = lessonRequestDTO.getStartTime();
+//        this.endTime = lessonRequestDTO.getEndTime();
+//    }
 }

@@ -24,7 +24,7 @@ public class PersonalEventResponseDTO {
 
     private Integer eventDuration;
 
-    private UserResponseDTO user;
+    private Long userId;
 
     public PersonalEventResponseDTO(PersonalEvent personalEvent) {
         this.id = personalEvent.getId();
@@ -33,6 +33,6 @@ public class PersonalEventResponseDTO {
         this.eventDate = personalEvent.getEventDate();
         this.eventStartTime = personalEvent.getEventStartTime();
         this.eventDuration = personalEvent.getEventDuration();
-        this.user = new UserResponseDTO(personalEvent.getUser());
+        this.userId = personalEvent.getUser().getId();
     }
 }

@@ -35,13 +35,7 @@ public class SubjectController {
     ) {
         var savedSubject = subjectService.addNew(
                 new Subject(
-                        subjectRequestDTO.getName(),
-                        subjectRequestDTO.getLessons().stream()
-                                .map(Lesson::new)
-                                .collect(Collectors.toList()),
-                        subjectRequestDTO.getTasks().stream()
-                                .map(Task::new)
-                                .collect(Collectors.toList())
+                        subjectRequestDTO.getName()
                 )
         );
         return new SubjectResponseDTO(savedSubject);
@@ -54,13 +48,7 @@ public class SubjectController {
     ) {
         var updatedSubject = subjectService.update(
                 new Subject(
-                        subjectRequestDTO.getName(),
-                        subjectRequestDTO.getLessons().stream()
-                                .map(Lesson::new)
-                                .collect(Collectors.toList()),
-                        subjectRequestDTO.getTasks().stream()
-                                .map(Task::new)
-                                .collect(Collectors.toList())
+                        subjectRequestDTO.getName()
                 ), id);
         return new SubjectResponseDTO(updatedSubject);
     }

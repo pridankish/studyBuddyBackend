@@ -16,9 +16,9 @@ public class LessonResponseDTO {
 
     private LocalDate lessonDate;
 
-    private ScheduleResponseDTO schedule;
+    private Long groupId;
 
-    private SubjectResponseDTO subject;
+    private Long subjectId;
 
     private String auditoryNumber;
 
@@ -31,8 +31,8 @@ public class LessonResponseDTO {
     public LessonResponseDTO(Lesson lesson) {
         this.id = lesson.getId();
         this.lessonDate = lesson.getLessonDate();
-        this.schedule = new ScheduleResponseDTO(lesson.getSchedule());
-        this.subject = new SubjectResponseDTO(lesson.getSubject());
+        this.groupId = lesson.getGroup().getId();
+        this.subjectId = lesson.getSubject().getId();
         this.auditoryNumber = lesson.getAuditoryNumber();
         this.lessonType = lesson.getLessonType();
         this.startTime = lesson.getStartTime();

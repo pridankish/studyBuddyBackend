@@ -37,7 +37,7 @@ public class UserService implements IService<User, Long> {
                             u.setCreatedAt(user.getCreatedAt());
                             u.setGroup(user.getGroup());
                             u.setPersonalEvents(user.getPersonalEvents());
-                            u.setUniversity(user.getUniversity());
+//                            u.setUniversity(user.getUniversity());
                             return userRepository.save(u);
                         }
                 ).orElseThrow(() -> new UserNotFoundException("User with id " + id + " doesn't exist"));

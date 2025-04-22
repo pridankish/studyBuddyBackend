@@ -21,7 +21,7 @@ public class TaskResponseDTO {
 
     private Boolean isCompleted;
 
-    private SubjectResponseDTO subject;
+    private Long subjectId;
 
     public TaskResponseDTO(Task task) {
         this.id = task.getId();
@@ -29,6 +29,6 @@ public class TaskResponseDTO {
         this.deadline = task.getDeadline();
         this.duration = task.getDuration();
         this.isCompleted = task.getIsCompleted();
-        this.subject = new SubjectResponseDTO(task.getSubject());
+        this.subjectId = task.getSubject().getId();
     }
 }

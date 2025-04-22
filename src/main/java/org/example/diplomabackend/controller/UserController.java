@@ -7,10 +7,13 @@ import org.example.diplomabackend.entity.Group;
 import org.example.diplomabackend.entity.PersonalEvent;
 import org.example.diplomabackend.entity.University;
 import org.example.diplomabackend.entity.User;
+import org.example.diplomabackend.service.GroupService;
+import org.example.diplomabackend.service.UniversityService;
 import org.example.diplomabackend.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -20,6 +23,7 @@ import java.util.stream.Collectors;
 public class UserController {
 
     private final UserService userService;
+    private final GroupService groupService;
 
     @GetMapping("/all")
     public ResponseEntity<List<UserResponseDTO>> getAllUsers() {
@@ -40,37 +44,33 @@ public class UserController {
                         userRequestDTO.getLastName(),
                         userRequestDTO.getEmail(),
                         userRequestDTO.getPassword(),
-                        userRequestDTO.getCreatedAt(),
-                        new Group(userRequestDTO.getGroup()),
-                        userRequestDTO.getPersonalEvents().stream()
-                                .map(PersonalEvent::new)
-                                .collect(Collectors.toList()),
-                        new University(userRequestDTO.getUniversity())
+                        LocalDateTime.now(),
+                        groupService.getById(userRequestDTO.getGroupId())
                 )
         );
         return new UserResponseDTO(savedUser);
     }
 
-    @PutMapping("/update/{id}")
-    public UserResponseDTO updateUser(
-            @RequestBody UserRequestDTO userRequestDTO,
-            @PathVariable Long id
-    ) {
-        var updatedUser = userService.update(
-                new User(
-                        userRequestDTO.getFirstName(),
-                        userRequestDTO.getLastName(),
-                        userRequestDTO.getEmail(),
-                        userRequestDTO.getPassword(),
-                        userRequestDTO.getCreatedAt(),
-                        new Group(userRequestDTO.getGroup()),
-                        userRequestDTO.getPersonalEvents().stream()
-                                .map(PersonalEvent::new)
-                                .collect(Collectors.toList()),
-                        new University(userRequestDTO.getUniversity())
-                ), id);
-        return new UserResponseDTO(updatedUser);
-    }
+//    @PutMapping("/update/{id}")
+//    public UserResponseDTO updateUser(
+//            @RequestBody UserRequestDTO userRequestDTO,
+//            @PathVariable Long id
+//    ) {
+//        var updatedUser = userService.update(
+//                new User(
+//                        userRequestDTO.getFirstName(),
+//                        userRequestDTO.getLastName(),
+//                        userRequestDTO.getEmail(),
+//                        userRequestDTO.getPassword(),
+//                        userRequestDTO.getCreatedAt(),
+//                        new Group(userRequestDTO.getGroup()),
+//                        userRequestDTO.getPersonalEvents().stream()
+//                                .map(PersonalEvent::new)
+//                                .collect(Collectors.toList()),
+//                        new University(userRequestDTO.getUniversity())
+//                ), id);
+//        return new UserResponseDTO(updatedUser);
+//    }
 
     @DeleteMapping("/delete/{id}")
     public void deleteUser(

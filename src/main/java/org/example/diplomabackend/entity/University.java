@@ -25,21 +25,25 @@ public class University {
 
     private String universityName;
 
-    @OneToMany(mappedBy = "university", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<User> users = new ArrayList<>();
+//    @OneToMany(mappedBy = "university", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//    private List<User> users = new ArrayList<>();
 
     @OneToMany(mappedBy = "university", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Group> groups = new ArrayList<>();
 
-    public University(String universityName, List<User> users, List<Group> groups) {
+    public University(String universityName, List<Group> groups) {
         this.universityName = universityName;
-        this.users = users;
+//        this.users = users;
         this.groups = groups;
     }
 
     public University(UniversityRequestDTO university) {
         this.universityName = university.getUniversityName();
-        this.users = new ArrayList<>();
+//        this.users = new ArrayList<>();
         this.groups = new ArrayList<>();
+    }
+
+    public University(String universityName) {
+        this.universityName = universityName;
     }
 }

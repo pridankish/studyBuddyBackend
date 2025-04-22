@@ -3,9 +3,6 @@ package org.example.diplomabackend.controller.dto.request;
 import lombok.Getter;
 import lombok.Setter;
 
-import java.time.LocalDateTime;
-import java.util.List;
-
 @Getter
 @Setter
 public class UserRequestDTO {
@@ -18,11 +15,7 @@ public class UserRequestDTO {
 
     private String password;
 
-    private LocalDateTime createdAt;
+    private Long groupId;
 
-    private GroupRequestDTO group;
-
-    private List<PersonalEventRequestDTO> personalEvents;
-
-    private UniversityRequestDTO university;
+    private Long universityId;
 }

@@ -31,7 +31,7 @@ public class LessonService implements IService<Lesson, Long> {
                 .map(
                         les -> {
                             les.setLessonDate(lesson.getLessonDate());
-                            les.setSchedule(lesson.getSchedule());
+                            les.setGroup(lesson.getGroup());
                             les.setSubject(lesson.getSubject());
                             les.setAuditoryNumber(lesson.getAuditoryNumber());
                             les.setLessonType(lesson.getLessonType());

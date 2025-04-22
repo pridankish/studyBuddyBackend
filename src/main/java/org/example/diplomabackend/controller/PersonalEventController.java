@@ -4,8 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.PersonalEventRequestDTO;
 import org.example.diplomabackend.controller.dto.response.PersonalEventResponseDTO;
 import org.example.diplomabackend.entity.PersonalEvent;
-import org.example.diplomabackend.entity.User;
 import org.example.diplomabackend.service.PersonalEventsService;
+import org.example.diplomabackend.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,6 +17,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/personal-events")
 public class PersonalEventController {
     private final PersonalEventsService personalEventService;
+    private final UserService userService;
 
     @GetMapping("/all")
     public ResponseEntity<List<PersonalEventResponseDTO>> getAllPersonalEvents() {
@@ -38,28 +39,28 @@ public class PersonalEventController {
                         personalEventRequestDTO.getEventDate(),
                         personalEventRequestDTO.getEventStartTime(),
                         personalEventRequestDTO.getEventDuration(),
-                        new User(personalEventRequestDTO.getUser())
+                        userService.getById(personalEventRequestDTO.getUserId())
                 )
         );
         return new PersonalEventResponseDTO(savedPersonalEvent);
     }
-
-    @PutMapping("/update/{id}")
-    public PersonalEventResponseDTO updatePersonalEvent(
-            @RequestBody PersonalEventRequestDTO personalEventRequestDTO,
-            @PathVariable Long id
-    ) {
-        var updatedPersonalEvent = personalEventService.update(
-                new PersonalEvent(
-                        personalEventRequestDTO.getEventTitle(),
-                        personalEventRequestDTO.getEventType(),
-                        personalEventRequestDTO.getEventDate(),
-                        personalEventRequestDTO.getEventStartTime(),
-                        personalEventRequestDTO.getEventDuration(),
-                        new User(personalEventRequestDTO.getUser())
-                ), id);
-        return new PersonalEventResponseDTO(updatedPersonalEvent);
-    }
+//
+//    @PutMapping("/update/{id}")
+//    public PersonalEventResponseDTO updatePersonalEvent(
+//            @RequestBody PersonalEventRequestDTO personalEventRequestDTO,
+//            @PathVariable Long id
+//    ) {
+//        var updatedPersonalEvent = personalEventService.update(
+//                new PersonalEvent(
+//                        personalEventRequestDTO.getEventTitle(),
+//                        personalEventRequestDTO.getEventType(),
+//                        personalEventRequestDTO.getEventDate(),
+//                        personalEventRequestDTO.getEventStartTime(),
+//                        personalEventRequestDTO.getEventDuration(),
+//                        new User(personalEventRequestDTO.getUser())
+//                ), id);
+//        return new PersonalEventResponseDTO(updatedPersonalEvent);
+//    }
 
     @DeleteMapping("/delete/{id}")
     public void deletePersonalEvent(

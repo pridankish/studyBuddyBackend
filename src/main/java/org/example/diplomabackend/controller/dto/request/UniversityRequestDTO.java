@@ -13,8 +13,4 @@ import java.util.List;
 public class UniversityRequestDTO {
 
     private String universityName;
-
-    private List<UserRequestDTO> users = new ArrayList<>();
-
-    private List<GroupRequestDTO> groups = new ArrayList<>();
 }

@@ -31,7 +31,7 @@ public class UniversityService implements IService<University, Long> {
                 .map(
                         uni -> {
                             uni.setUniversityName(university.getUniversityName());
-                            uni.setUsers(university.getUsers());
+//                            uni.setUsers(university.getUsers());
                             uni.setGroups(university.getGroups());
                             return universityRepository.save(uni);
                         }

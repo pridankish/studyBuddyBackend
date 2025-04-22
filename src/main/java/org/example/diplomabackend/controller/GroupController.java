@@ -4,10 +4,9 @@ import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.GroupRequestDTO;
 import org.example.diplomabackend.controller.dto.response.GroupResponseDTO;
 import org.example.diplomabackend.entity.Group;
-import org.example.diplomabackend.entity.Schedule;
-import org.example.diplomabackend.entity.University;
 import org.example.diplomabackend.service.GroupService;
 
+import org.example.diplomabackend.service.UniversityService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,6 +18,7 @@ import java.util.stream.Collectors;
 @RequestMapping("/groups")
 public class GroupController {
     private final GroupService groupService;
+    private final UniversityService universityService;
 
     @GetMapping("/all")
     public ResponseEntity<List<GroupResponseDTO>> getAllGroups() {
@@ -36,9 +36,7 @@ public class GroupController {
         var savedGroup = groupService.addNew(
                 new Group (
                         groupRequestDTO.getGroupNumber(),
-                        groupRequestDTO.getUsers(),
-                        new University(groupRequestDTO.getUniversity()),
-                        new Schedule(groupRequestDTO.getSchedule())
+                        universityService.getById(groupRequestDTO.getUniversityId())
                 )
         );
         return new GroupResponseDTO(savedGroup);
@@ -52,9 +50,7 @@ public class GroupController {
         var updatedGroup = groupService.update(
                 new Group (
                         groupRequestDTO.getGroupNumber(),
-                        groupRequestDTO.getUsers(),
-                        new University(groupRequestDTO.getUniversity()),
-                        new Schedule(groupRequestDTO.getSchedule())
+                        universityService.getById(groupRequestDTO.getUniversityId())
                 ), id);
 
         return new GroupResponseDTO(updatedGroup);

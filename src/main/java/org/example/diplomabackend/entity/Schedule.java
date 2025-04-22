@@ -10,7 +10,7 @@ import org.example.diplomabackend.controller.dto.request.ScheduleRequestDTO;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+//@Entity
 @ToString
 @Getter
 @Setter
@@ -33,9 +33,9 @@ public class Schedule {
         this.group = group;
         this.lessons = new ArrayList<>();
     }
-
-    public Schedule(ScheduleRequestDTO schedule) {
-        this.group = new Group(schedule.getGroup());
-        this.lessons = new ArrayList<>();
-    }
+//
+//    public Schedule(ScheduleRequestDTO schedule) {
+//        this.group = new Group(schedule.getGroup());
+//        this.lessons = new ArrayList<>();
+//    }
 }

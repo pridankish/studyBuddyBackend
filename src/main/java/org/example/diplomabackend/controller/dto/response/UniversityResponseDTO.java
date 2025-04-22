@@ -16,16 +16,11 @@ public class UniversityResponseDTO {
 
     private String universityName;
 
-    private List<UserResponseDTO> users;
-
     private List<GroupResponseDTO> groups;
 
     public UniversityResponseDTO(University university) {
         this.id = university.getId();
         this.universityName = university.getUniversityName();
-        this.users = university.getUsers().stream()
-                .map(UserResponseDTO::new)
-                .collect(Collectors.toList());
         this.groups = university.getGroups().stream()
                 .map(GroupResponseDTO::new)
                 .collect(Collectors.toList());

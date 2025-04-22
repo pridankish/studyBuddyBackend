@@ -25,11 +25,9 @@ public class UserResponseDTO {
 
     private LocalDateTime createdAt;
 
-    private GroupResponseDTO group;
+    private Long groupId;
 
     private List<PersonalEventResponseDTO> personalEvents;
-
-    private UniversityResponseDTO university;
 
     public UserResponseDTO(User user) {
         this.id = user.getId();
@@ -38,11 +36,9 @@ public class UserResponseDTO {
         this.email = user.getEmail();
         this.password = user.getPassword();
         this.createdAt = user.getCreatedAt();
-        this.group = new GroupResponseDTO(user.getGroup());
+        this.groupId = user.getGroup().getId();
         this.personalEvents = user.getPersonalEvents().stream()
                 .map(PersonalEventResponseDTO::new)
                 .collect(Collectors.toList());
-
-        this.university = new UniversityResponseDTO(user.getUniversity());
     }
 }

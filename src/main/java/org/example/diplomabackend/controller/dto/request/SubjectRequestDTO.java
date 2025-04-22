@@ -13,8 +13,4 @@ import java.util.List;
 public class SubjectRequestDTO {
 
     private String name;
-
-    private List<LessonRequestDTO> lessons = new ArrayList<>();
-
-    private List<TaskRequestDTO> tasks = new ArrayList<>();
 }

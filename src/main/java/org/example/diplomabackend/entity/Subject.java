@@ -41,4 +41,8 @@ public class Subject {
         this.lessons = new ArrayList<>();
         this.tasks = new ArrayList<>();
     }
+
+    public Subject(String name) {
+        this.name = name;
+    }
 }

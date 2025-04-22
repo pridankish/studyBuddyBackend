@@ -41,11 +41,11 @@ public class Task {
         this.subject = subject;
     }
 
-    public Task(TaskRequestDTO taskRequestDTO) {
-        this.name = taskRequestDTO.getName();
-        this.deadline = taskRequestDTO.getDeadline();
-        this.duration = taskRequestDTO.getDuration();
-        this.isCompleted = taskRequestDTO.getIsCompleted();
-        this.subject = new Subject(taskRequestDTO.getSubject());
-    }
+//    public Task(TaskRequestDTO taskRequestDTO) {
+//        this.name = taskRequestDTO.getName();
+//        this.deadline = taskRequestDTO.getDeadline();
+//        this.duration = taskRequestDTO.getDuration();
+//        this.isCompleted = taskRequestDTO.getIsCompleted();
+//        this.subject = new Subject(taskRequestDTO.getSubject());
+//    }
 }

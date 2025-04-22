@@ -5,6 +5,7 @@ import org.example.diplomabackend.controller.dto.request.TaskRequestDTO;
 import org.example.diplomabackend.controller.dto.response.TaskResponseDTO;
 import org.example.diplomabackend.entity.Subject;
 import org.example.diplomabackend.entity.Task;
+import org.example.diplomabackend.service.SubjectService;
 import org.example.diplomabackend.service.TaskService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class TaskController {
 
     private final TaskService taskService;
+    private final SubjectService subjectService;
 
     @GetMapping("/all")
     public ResponseEntity<List<TaskResponseDTO>> getAllTasks() {
@@ -38,7 +40,7 @@ public class TaskController {
                         taskRequestDTO.getDeadline(),
                         taskRequestDTO.getDuration(),
                         taskRequestDTO.getIsCompleted(),
-                        new Subject(taskRequestDTO.getSubject())
+                        subjectService.getById(taskRequestDTO.getSubjectId())
                 )
         );
         return new TaskResponseDTO(savedTask);
@@ -55,7 +57,7 @@ public class TaskController {
                         taskRequestDTO.getDeadline(),
                         taskRequestDTO.getDuration(),
                         taskRequestDTO.getIsCompleted(),
-                        new Subject(taskRequestDTO.getSubject())
+                        subjectService.getById(taskRequestDTO.getSubjectId())
                 ), id);
         return new TaskResponseDTO(updatedTask);
     }

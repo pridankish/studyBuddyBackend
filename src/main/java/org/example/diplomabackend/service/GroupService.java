@@ -32,7 +32,6 @@ public class GroupService implements IService<Group, Long> {
                         gr -> {
                             gr.setGroupNumber(group.getGroupNumber());
                             gr.setUsers(group.getUsers());
-                            gr.setSchedule(group.getSchedule());
                             gr.setUniversity(group.getUniversity());
                             return groupRepository.save(gr);
                         }

@@ -19,9 +19,9 @@ public class GroupResponseDTO {
 
     private List<UserResponseDTO> users;
 
-    private UniversityResponseDTO university;
+    private Long universityId;
 
-    private ScheduleResponseDTO schedule;
+    private List<LessonResponseDTO> lessons;
 
     public GroupResponseDTO(Group group) {
         this.id = group.getId();
@@ -29,7 +29,9 @@ public class GroupResponseDTO {
         this.users = group.getUsers().stream()
                 .map(UserResponseDTO::new)
                 .collect(Collectors.toList());
-        this.university = new UniversityResponseDTO(group.getUniversity());
-        this.schedule = new ScheduleResponseDTO(group.getSchedule());
+        this.universityId = group.getUniversity().getId();
+        this.lessons = group.getLessons().stream()
+                .map(LessonResponseDTO::new)
+                .collect(Collectors.toList());
     }
 }

@@ -52,6 +52,6 @@ public class PersonalEvent {
         this.eventDate = personalEventRequestDTO.getEventDate();
         this.eventStartTime = personalEventRequestDTO.getEventStartTime();
         this.eventDuration = personalEventRequestDTO.getEventDuration();
-        this.user = new User(personalEventRequestDTO.getUser());
+//        this.user = new User(personalEventRequestDTO.getUser());
     }
 }

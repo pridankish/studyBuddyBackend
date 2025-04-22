@@ -21,5 +21,5 @@ public class PersonalEventRequestDTO {
 
     private Integer eventDuration;
 
-    private UserRequestDTO user;
+    private Long userId;
 }

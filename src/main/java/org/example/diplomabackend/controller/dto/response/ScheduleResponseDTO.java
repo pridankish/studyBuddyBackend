@@ -11,10 +11,10 @@ import org.example.diplomabackend.entity.Schedule;
 public class ScheduleResponseDTO {
     private Long id;
 
-    private GroupResponseDTO group;
+    private Long groupId;
 
     public ScheduleResponseDTO(Schedule schedule) {
         this.id = schedule.getId();
-        this.group = new GroupResponseDTO(schedule.getGroup());
+        this.groupId = schedule.getGroup().getId();
     }
 }
