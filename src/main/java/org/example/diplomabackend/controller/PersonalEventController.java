@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/personal-events")
+@CrossOrigin(origins = "*")
 public class PersonalEventController {
     private final PersonalEventsService personalEventService;
     private final UserService userService;

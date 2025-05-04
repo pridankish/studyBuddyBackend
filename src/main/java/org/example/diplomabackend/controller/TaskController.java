@@ -15,6 +15,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/tasks")
+@CrossOrigin(origins = "*")
 public class TaskController {
 
     private final TaskService taskService;

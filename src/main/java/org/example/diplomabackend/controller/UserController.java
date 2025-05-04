@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.UserRequestDTO;
 import org.example.diplomabackend.controller.dto.response.UserResponseDTO;
 import org.example.diplomabackend.entity.User;
+import org.example.diplomabackend.exceptions.notFound.UserNotFoundException;
 import org.example.diplomabackend.service.GroupService;
 import org.example.diplomabackend.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/users")
+@CrossOrigin(origins = "*")
 public class UserController {
 
     private final UserService userService;
@@ -34,17 +36,24 @@ public class UserController {
     public UserResponseDTO createUser(
             @RequestBody UserRequestDTO userRequestDTO
     ) {
-        var savedUser = userService.addNew(
-                new User(
-                        userRequestDTO.getFirstName(),
-                        userRequestDTO.getLastName(),
-                        userRequestDTO.getEmail(),
-                        userRequestDTO.getPassword(),
-                        LocalDateTime.now(),
-                        groupService.getById(userRequestDTO.getGroupId())
-                )
-        );
-        return new UserResponseDTO(savedUser);
+        User userWithSameEmail = userService.findByEmail(userRequestDTO.getEmail()).get();
+
+        if (userWithSameEmail == null) {
+            var savedUser = userService.addNew(
+                    new User(
+                            userRequestDTO.getFirstName(),
+                            userRequestDTO.getLastName(),
+                            userRequestDTO.getEmail(),
+                            userRequestDTO.getPassword(),
+                            LocalDateTime.now(),
+                            groupService.getById(userRequestDTO.getGroupId())
+                    )
+            );
+            return new UserResponseDTO(savedUser);
+        }
+        else {
+            throw new UserNotFoundException("User with email: " + userRequestDTO.getEmail() + " already exists");
+        }
     }
 
 //    @PutMapping("/update/{id}")
@@ -81,4 +90,28 @@ public class UserController {
     ) {
         return new UserResponseDTO(userService.getById(id));
     }
+
+
+    //  РЕГИСТРАЦИЯ
+
+//    @PostMapping("/register")
+//    public ResponseEntity<String> register(
+//            @RequestBody UserRequestDTO userRequestDTO
+//    ) {
+//            if (userService.register(
+//                    new User(
+//                            userRequestDTO.getFirstName(),
+//                            userRequestDTO.getLastName(),
+//                            userRequestDTO.getEmail(),
+//                            userRequestDTO.getPassword(),
+//                            LocalDateTime.now(),
+//                            groupService.getById(userRequestDTO.getGroupId())
+//                    )
+//            )) {
+//                return ResponseEntity.ok("User registered successfully");
+//            }
+//            else {
+//                return ResponseEntity.badRequest().body("User with email: " + userRequestDTO.getEmail() + " already exists");
+//            }
+//    }
 }

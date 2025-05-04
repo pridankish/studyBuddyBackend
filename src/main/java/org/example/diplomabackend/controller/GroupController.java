@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/groups")
+@CrossOrigin(origins = "*")
 public class GroupController {
     private final GroupService groupService;
     private final UniversityService universityService;

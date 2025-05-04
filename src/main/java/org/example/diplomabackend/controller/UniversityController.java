@@ -14,6 +14,7 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/universities")
+@CrossOrigin(origins = "*")
 public class UniversityController {
 
     private final UniversityService universityService;

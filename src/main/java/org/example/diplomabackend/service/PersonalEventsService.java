@@ -3,6 +3,7 @@ package org.example.diplomabackend.service;
 import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.entity.PersonalEvent;
 import org.example.diplomabackend.exceptions.notFound.PersonalEventNotFoundException;
+import org.example.diplomabackend.repository.LessonRepository;
 import org.example.diplomabackend.repository.PersonalEventRepository;
 import org.springframework.stereotype.Service;
 
@@ -13,10 +14,27 @@ import java.util.List;
 public class PersonalEventsService implements IService<PersonalEvent, Long> {
 
     private final PersonalEventRepository personalEventRepository;
+    private final LessonRepository lessonRepository;
 
     @Override
     public PersonalEvent addNew(PersonalEvent personalEvent) {
-        return personalEventRepository.save(personalEvent);
+
+        // TODO: добавить поиск по пользователю, в сессии которого находимся
+
+        var lessonsThisDay= lessonRepository.getLessonsByLessonDate(personalEvent.getEventDate()).stream()
+                .filter(l -> personalEvent.getEventStartTime().isAfter(l.getStartTime()) && personalEvent.getEventStartTime().isBefore(l.getEndTime()))
+                .toList();
+
+        var personalEventsThisDay= lessonRepository.getLessonsByLessonDate(personalEvent.getEventDate()).stream()
+                .filter(pe -> personalEvent.getEventStartTime().isAfter(pe.getStartTime()) && personalEvent.getEventStartTime().isBefore(pe.getEndTime()))
+                .toList();
+
+        if (lessonsThisDay.isEmpty() && personalEventsThisDay.isEmpty()) {
+            return personalEventRepository.save(personalEvent);
+        } else {
+            // TODO: new exception class for that case
+            throw new PersonalEventNotFoundException("You cannot create new personal event. This time is booked by lesson or another personal event.");
+        }
     }
 
     @Override

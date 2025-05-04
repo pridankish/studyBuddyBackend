@@ -14,11 +14,12 @@ import java.util.stream.Collectors;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("/subjects")
+@CrossOrigin(origins = "*")
 public class SubjectController {
 
     private final SubjectService subjectService;
 
-    @GetMapping
+    @GetMapping("/all")
     public ResponseEntity<List<SubjectResponseDTO>> getAllSubjects() {
         return ResponseEntity.ok(
                 subjectService.getAll().stream()
