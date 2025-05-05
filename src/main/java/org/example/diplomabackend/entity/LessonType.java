@@ -14,27 +14,18 @@ import java.util.List;
 @Getter
 @Setter
 @NoArgsConstructor
-@Table(name = "subjects")
-public class Subject {
-
+@Table(name = "lesson_type")
+public class LessonType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String name;
 
-    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "lessonType", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Lesson> lessons = new ArrayList<>();
 
-    @OneToMany(mappedBy = "subject", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    private List<Task> tasks = new ArrayList<>();
-
-    @ManyToOne
-    @JoinColumn(name = "teacher_id")
-    private Teacher teacher;
-
-    public Subject(String name, Teacher teacher) {
+    public LessonType(String name) {
         this.name = name;
-        this.teacher = teacher;
     }
 }

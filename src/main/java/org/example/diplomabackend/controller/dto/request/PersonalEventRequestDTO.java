@@ -12,7 +12,7 @@ public class PersonalEventRequestDTO {
 
     private String eventTitle;
 
-    private String eventType;
+    private Long eventTypeId;
 
     private LocalDate eventDate;
 

@@ -29,7 +29,10 @@ public class SecurityConfig {
                             "/subjects/**",
                             "/lessons/**",
                             "/tasks/**",
-                            "/personal-events/**"
+                            "/personal-events/**",
+                            "/personal-event-types/**",
+                            "/lesson-types/**",
+                            "/teachers/**"
                     )
                         .permitAll()
                         .anyRequest().authenticated()

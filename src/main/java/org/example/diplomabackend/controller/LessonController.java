@@ -6,6 +6,7 @@ import org.example.diplomabackend.controller.dto.response.LessonResponseDTO;
 import org.example.diplomabackend.entity.Lesson;
 import org.example.diplomabackend.service.GroupService;
 import org.example.diplomabackend.service.LessonService;
+import org.example.diplomabackend.service.LessonTypeService;
 import org.example.diplomabackend.service.SubjectService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,6 +22,7 @@ public class LessonController {
     private final LessonService lessonService;
     private final GroupService groupService;
     private final SubjectService subjectService;
+    private final LessonTypeService lessonTypeService;
 
     @GetMapping("/all")
     public ResponseEntity<List<LessonResponseDTO>> getAllLessons() {
@@ -41,7 +43,7 @@ public class LessonController {
                         groupService.getById(lessonRequestDTO.getGroupId()),
                         subjectService.getById(lessonRequestDTO.getSubjectId()),
                         lessonRequestDTO.getAuditoryNumber(),
-                        lessonRequestDTO.getLessonType(),
+                        lessonTypeService.getById(lessonRequestDTO.getLessonTypeId()),
                         lessonRequestDTO.getStartTime(),
                         lessonRequestDTO.getEndTime()
                 )
@@ -60,7 +62,7 @@ public class LessonController {
                         groupService.getById(lessonRequestDTO.getGroupId()),
                         subjectService.getById(lessonRequestDTO.getSubjectId()),
                         lessonRequestDTO.getAuditoryNumber(),
-                        lessonRequestDTO.getLessonType(),
+                        lessonTypeService.getById(lessonRequestDTO.getLessonTypeId()),
                         lessonRequestDTO.getStartTime(),
                         lessonRequestDTO.getEndTime()
                 ), id);

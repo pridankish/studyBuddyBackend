@@ -18,7 +18,7 @@ public class LessonRequestDTO {
 
     private String auditoryNumber;
 
-    private String lessonType;
+    private Long lessonTypeId;
 
     private LocalTime startTime;
 

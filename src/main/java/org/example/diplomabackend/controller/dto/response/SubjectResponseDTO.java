@@ -20,6 +20,8 @@ public class SubjectResponseDTO {
 
     private List<TaskResponseDTO> tasks;
 
+    private Long teacherId;
+
     public SubjectResponseDTO(Subject subject) {
         this.id = subject.getId();
         this.name = subject.getName();
@@ -29,5 +31,6 @@ public class SubjectResponseDTO {
         this.tasks = subject.getTasks().stream()
                 .map(TaskResponseDTO::new)
                 .collect(Collectors.toList());
+        this.teacherId = subject.getTeacher().getId();
     }
 }

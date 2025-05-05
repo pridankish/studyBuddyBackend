@@ -5,11 +5,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
-import org.example.diplomabackend.controller.dto.request.PersonalEventRequestDTO;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
-import java.util.List;
 
 @Entity
 @ToString
@@ -25,8 +23,6 @@ public class PersonalEvent {
 
     private String eventTitle;
 
-    private String eventType;
-
     private LocalDate eventDate;
 
     private LocalTime eventStartTime;
@@ -37,9 +33,13 @@ public class PersonalEvent {
     @JoinColumn(name = "user_id")
     private User user;
 
-    public PersonalEvent(String eventTitle, String eventType, LocalDate eventDate, LocalTime eventSTime, Integer eventDuration, User user) {
+    @ManyToOne
+    @JoinColumn(name = "personal_event_type_id")
+    private PersonalEventType personalEventType;
+
+    public PersonalEvent(String eventTitle, PersonalEventType personalEventType, LocalDate eventDate, LocalTime eventSTime, Integer eventDuration, User user) {
         this.eventTitle = eventTitle;
-        this.eventType = eventType;
+        this.personalEventType = personalEventType;
         this.eventDate = eventDate;
         this.eventStartTime = eventSTime;
         this.eventDuration = eventDuration;

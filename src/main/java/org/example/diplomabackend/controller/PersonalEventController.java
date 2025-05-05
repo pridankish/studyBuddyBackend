@@ -4,6 +4,7 @@ import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.PersonalEventRequestDTO;
 import org.example.diplomabackend.controller.dto.response.PersonalEventResponseDTO;
 import org.example.diplomabackend.entity.PersonalEvent;
+import org.example.diplomabackend.service.PersonalEventTypeService;
 import org.example.diplomabackend.service.PersonalEventsService;
 import org.example.diplomabackend.service.UserService;
 import org.springframework.http.ResponseEntity;
@@ -19,6 +20,7 @@ import java.util.stream.Collectors;
 public class PersonalEventController {
     private final PersonalEventsService personalEventService;
     private final UserService userService;
+    private final PersonalEventTypeService personalEventTypeService;
 
     @GetMapping("/all")
     public ResponseEntity<List<PersonalEventResponseDTO>> getAllPersonalEvents() {
@@ -36,7 +38,7 @@ public class PersonalEventController {
         var savedPersonalEvent = personalEventService.addNew(
                 new PersonalEvent(
                         personalEventRequestDTO.getEventTitle(),
-                        personalEventRequestDTO.getEventType(),
+                        personalEventTypeService.getById(personalEventRequestDTO.getEventTypeId()),
                         personalEventRequestDTO.getEventDate(),
                         personalEventRequestDTO.getEventStartTime(),
                         personalEventRequestDTO.getEventDuration(),

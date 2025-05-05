@@ -36,9 +36,9 @@ public class UserController {
     public UserResponseDTO createUser(
             @RequestBody UserRequestDTO userRequestDTO
     ) {
-        User userWithSameEmail = userService.findByEmail(userRequestDTO.getEmail()).get();
+        var userWithSameEmail = userService.findByEmail(userRequestDTO.getEmail()).isPresent();
 
-        if (userWithSameEmail == null) {
+        if (!userWithSameEmail) {
             var savedUser = userService.addNew(
                     new User(
                             userRequestDTO.getFirstName(),

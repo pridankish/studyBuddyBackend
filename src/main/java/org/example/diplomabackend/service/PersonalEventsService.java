@@ -15,6 +15,7 @@ public class PersonalEventsService implements IService<PersonalEvent, Long> {
 
     private final PersonalEventRepository personalEventRepository;
     private final LessonRepository lessonRepository;
+    private final PersonalEventTypeService personalEventTypeService;
 
     @Override
     public PersonalEvent addNew(PersonalEvent personalEvent) {
@@ -51,7 +52,7 @@ public class PersonalEventsService implements IService<PersonalEvent, Long> {
                             pe.setEventDate(personalEvent.getEventDate());
                             pe.setUser(personalEvent.getUser());
                             pe.setEventDuration(personalEvent.getEventDuration());
-                            pe.setEventType(personalEvent.getEventType());
+                            pe.setPersonalEventType(personalEventTypeService.getById(personalEvent.getPersonalEventType().getId()));
                             pe.setEventStartTime(personalEvent.getEventStartTime());
                             pe.setEventTitle(personalEvent.getEventTitle());
                             return personalEventRepository.save(pe);

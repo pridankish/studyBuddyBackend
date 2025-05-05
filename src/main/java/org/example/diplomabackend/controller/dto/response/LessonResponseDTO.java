@@ -22,7 +22,7 @@ public class LessonResponseDTO {
 
     private String auditoryNumber;
 
-    private String lessonType;
+    private Long lessonTypeId;
 
     private LocalTime startTime;
 
@@ -34,7 +34,7 @@ public class LessonResponseDTO {
         this.groupId = lesson.getGroup().getId();
         this.subjectId = lesson.getSubject().getId();
         this.auditoryNumber = lesson.getAuditoryNumber();
-        this.lessonType = lesson.getLessonType();
+        this.lessonTypeId = lesson.getLessonType().getId();
         this.startTime = lesson.getStartTime();
         this.endTime = lesson.getEndTime();
     }

@@ -16,7 +16,7 @@ public class PersonalEventResponseDTO {
 
     private String eventTitle;
 
-    private String eventType;
+    private Long eventTypeId;
 
     private LocalDate eventDate;
 
@@ -29,7 +29,7 @@ public class PersonalEventResponseDTO {
     public PersonalEventResponseDTO(PersonalEvent personalEvent) {
         this.id = personalEvent.getId();
         this.eventTitle = personalEvent.getEventTitle();
-        this.eventType = personalEvent.getEventType();
+        this.eventTypeId = personalEvent.getPersonalEventType().getId();
         this.eventDate = personalEvent.getEventDate();
         this.eventStartTime = personalEvent.getEventStartTime();
         this.eventDuration = personalEvent.getEventDuration();

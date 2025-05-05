@@ -31,15 +31,17 @@ public class Lesson {
     @JoinColumn(name = "subject_id")
     private Subject subject;
 
-    private String auditoryNumber;
+    @ManyToOne
+    @JoinColumn(name = "lesson_type_id")
+    private LessonType lessonType;
 
-    private String lessonType;
+    private String auditoryNumber;
 
     private LocalTime startTime;
 
     private LocalTime endTime;
 
-    public Lesson(LocalDate lessonDate, Group group, Subject subject, String auditoryNumber, String lessonType, LocalTime startTime, LocalTime endTime) {
+    public Lesson(LocalDate lessonDate, Group group, Subject subject, String auditoryNumber, LessonType lessonType, LocalTime startTime, LocalTime endTime) {
         this.lessonDate = lessonDate;
         this.group = group;
         this.subject = subject;

@@ -52,7 +52,7 @@ public class UniversityController {
         return new UniversityResponseDTO(updatedUniversity);
     }
 
-    @DeleteMapping("/update/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deleteUniversity(
             @PathVariable Long id
     ) {

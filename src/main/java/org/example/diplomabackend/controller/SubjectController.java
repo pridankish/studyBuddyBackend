@@ -5,6 +5,7 @@ import org.example.diplomabackend.controller.dto.request.SubjectRequestDTO;
 import org.example.diplomabackend.controller.dto.response.SubjectResponseDTO;
 import org.example.diplomabackend.entity.Subject;
 import org.example.diplomabackend.service.SubjectService;
+import org.example.diplomabackend.service.TeacherService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +19,7 @@ import java.util.stream.Collectors;
 public class SubjectController {
 
     private final SubjectService subjectService;
+    private final TeacherService teacherService;
 
     @GetMapping("/all")
     public ResponseEntity<List<SubjectResponseDTO>> getAllSubjects() {
@@ -34,7 +36,8 @@ public class SubjectController {
     ) {
         var savedSubject = subjectService.addNew(
                 new Subject(
-                        subjectRequestDTO.getName()
+                        subjectRequestDTO.getName(),
+                        teacherService.getById(subjectRequestDTO.getTeacherId())
                 )
         );
         return new SubjectResponseDTO(savedSubject);
@@ -47,7 +50,8 @@ public class SubjectController {
     ) {
         var updatedSubject = subjectService.update(
                 new Subject(
-                        subjectRequestDTO.getName()
+                        subjectRequestDTO.getName(),
+                        teacherService.getById(subjectRequestDTO.getTeacherId())
                 ), id);
         return new SubjectResponseDTO(updatedSubject);
     }
