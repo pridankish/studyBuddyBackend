@@ -28,6 +28,19 @@ public class AuthController {
     private final UserService userService;
     private final GroupService groupService;
 
+    @Getter
+    @Setter
+    static class LoginRequest {
+        private String username;
+        private String password;
+    }
+
+    @Getter
+    @AllArgsConstructor
+    static class TokenResponse {
+        private String token;
+    }
+
     @PostMapping("/login")
     public TokenResponse login(
             @RequestBody LoginRequest loginRequest
@@ -58,18 +71,5 @@ public class AuthController {
         else {
             return ResponseEntity.badRequest().body("User with email: " + userRequestDTO.getEmail() + " already exists");
         }
-    }
-
-    @Getter
-    @Setter
-    static class LoginRequest {
-        private String username;
-        private String password;
-    }
-
-    @Getter
-    @AllArgsConstructor
-    static class TokenResponse {
-        private String token;
     }
 }

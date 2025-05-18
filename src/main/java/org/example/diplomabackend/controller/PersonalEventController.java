@@ -47,23 +47,23 @@ public class PersonalEventController {
         );
         return new PersonalEventResponseDTO(savedPersonalEvent);
     }
-//
-//    @PutMapping("/update/{id}")
-//    public PersonalEventResponseDTO updatePersonalEvent(
-//            @RequestBody PersonalEventRequestDTO personalEventRequestDTO,
-//            @PathVariable Long id
-//    ) {
-//        var updatedPersonalEvent = personalEventService.update(
-//                new PersonalEvent(
-//                        personalEventRequestDTO.getEventTitle(),
-//                        personalEventRequestDTO.getEventType(),
-//                        personalEventRequestDTO.getEventDate(),
-//                        personalEventRequestDTO.getEventStartTime(),
-//                        personalEventRequestDTO.getEventDuration(),
-//                        new User(personalEventRequestDTO.getUser())
-//                ), id);
-//        return new PersonalEventResponseDTO(updatedPersonalEvent);
-//    }
+
+    @PutMapping("/update/{id}")
+    public PersonalEventResponseDTO updatePersonalEvent(
+            @RequestBody PersonalEventRequestDTO personalEventRequestDTO,
+            @PathVariable Long id
+    ) {
+        var updatedPersonalEvent = personalEventService.update(
+                new PersonalEvent(
+                        personalEventRequestDTO.getEventTitle(),
+                        personalEventTypeService.getById(personalEventRequestDTO.getEventTypeId()),
+                        personalEventRequestDTO.getEventDate(),
+                        personalEventRequestDTO.getEventStartTime(),
+                        personalEventRequestDTO.getEventDuration(),
+                        userService.getById(personalEventRequestDTO.getUserId())
+                ), id);
+        return new PersonalEventResponseDTO(updatedPersonalEvent);
+    }
 
     @DeleteMapping("/delete/{id}")
     public void deletePersonalEvent(
