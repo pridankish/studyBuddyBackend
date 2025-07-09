@@ -1,4 +1,4 @@
-package org.example.diplomabackend.config.utils;
+package org.example.diplomabackend.config.security.utils;
 
 import io.jsonwebtoken.JwtException;
 import io.jsonwebtoken.Jwts;

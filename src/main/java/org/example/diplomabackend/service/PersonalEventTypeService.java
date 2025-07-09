@@ -29,7 +29,6 @@ public class PersonalEventTypeService implements IService<PersonalEventType, Lon
         return personalEventTypeRepository.findById(id).map(
                 perType -> {
                     perType.setName(personalEventType.getName());
-                    perType.setPersonalEvents(personalEventType.getPersonalEvents());
                     return personalEventTypeRepository.save(perType);
                 }
         ).orElseThrow(() -> new RuntimeException("Personal Event Type Not Found"));

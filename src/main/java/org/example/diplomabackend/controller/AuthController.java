@@ -4,7 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import org.example.diplomabackend.config.utils.JwtUtil;
+import org.example.diplomabackend.config.security.utils.JwtUtil;
 import org.example.diplomabackend.controller.dto.request.UserRequestDTO;
 import org.example.diplomabackend.entity.User;
 import org.example.diplomabackend.service.GroupService;

@@ -31,7 +31,6 @@ public class UniversityService implements IService<University, Long> {
                 .map(
                         uni -> {
                             uni.setUniversityName(university.getUniversityName());
-                            uni.setGroups(university.getGroups());
                             return universityRepository.save(uni);
                         }
                 ).orElseThrow(() -> new UniversityNotFoundException("University with id " + id + " doesn't exist"));

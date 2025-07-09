@@ -31,7 +31,6 @@ public class TeacherService implements IService<Teacher, Long> {
                     t.setFirstName(teacher.getFirstName());
                     t.setMiddleName(teacher.getMiddleName());
                     t.setLastName(teacher.getLastName());
-                    t.setSubjects(teacher.getSubjects());
                     return teacherRepository.save(t);
                 }
         ).orElseThrow(() -> new RuntimeException("Teacher with id " + id + " not found"));

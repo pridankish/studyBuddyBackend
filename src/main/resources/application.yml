@@ -12,3 +12,34 @@ spring:
     url: jdbc:postgresql://localhost:5432/diploma_db
     username: andrejpridankin
     password:
+
+#  mail:
+#    username: pridankish101@gmail.com
+#    password: lbjaopcbmieoycsv
+#    host: smtp.gmail.com
+#    properties:
+#      mail:
+#        smtp:
+#          ssl:
+#            protocols: TLSv1.2
+#          auth: true
+#          starttls:
+#            enable: true
+#        protocol: smtp
+#        port: 587
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: pridankish101@gmail.com
+    password: lbjaopcbmieoycsv
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+          connectiontimeout: 5000
+          timeout: 5000
+          writetimeout: 5000
+      debug: true

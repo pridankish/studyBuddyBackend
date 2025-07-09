@@ -31,7 +31,6 @@ public class GroupService implements IService<Group, Long> {
                 .map(
                         gr -> {
                             gr.setGroupNumber(group.getGroupNumber());
-                            gr.setUsers(group.getUsers());
                             gr.setUniversity(group.getUniversity());
                             return groupRepository.save(gr);
                         }

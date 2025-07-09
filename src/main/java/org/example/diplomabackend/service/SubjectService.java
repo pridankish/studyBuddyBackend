@@ -31,8 +31,6 @@ public class SubjectService implements IService<Subject, Long> {
                 .map(
                         sub -> {
                             sub.setName(subject.getName());
-                            sub.setLessons(subject.getLessons());
-                            sub.setTasks(subject.getTasks());
                             return subjectRepository.save(sub);
                         }
                 ).orElseThrow(() -> new SubjectNotFoundException("Subject with id " + id + " doesn't exist"));

@@ -1,6 +1,6 @@
-package org.example.diplomabackend.config;
+package org.example.diplomabackend.config.security;
 
-import org.example.diplomabackend.config.filter.JwtAuthenticationFilter;
+import org.example.diplomabackend.config.security.filter.JwtAuthenticationFilter;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -24,7 +24,7 @@ public class SecurityConfig {
                 .csrf(AbstractHttpConfigurer::disable)
                 .authorizeHttpRequests(auth -> auth
                     .requestMatchers(
-                            "/users/**",
+//                            "/users/**",
                             "/universities/**",
                             "/groups/**",
                             "/auth/**",

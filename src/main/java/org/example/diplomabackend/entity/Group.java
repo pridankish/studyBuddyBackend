@@ -33,13 +33,6 @@ public class Group {
     @OneToMany(mappedBy = "group", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Lesson> lessons = new ArrayList<>();
 
-    public Group(String groupNumber, List<User> users, List<Lesson> lessons, University university) {
-        this.groupNumber = groupNumber;
-        this.users = users;
-        this.lessons = lessons;
-        this.university = university;
-    }
-
     public Group(String groupNumber, University university) {
         this.groupNumber = groupNumber;
         this.university = university;

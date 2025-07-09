@@ -4,6 +4,8 @@ import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.entity.User;
 import org.example.diplomabackend.exceptions.notFound.UserNotFoundException;
 import org.example.diplomabackend.repository.UserRepository;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -42,7 +44,6 @@ public class UserService implements IService<User, Long>, UserDetailsService {
                             u.setPassword(user.getPassword());
                             u.setCreatedAt(user.getCreatedAt());
                             u.setGroup(user.getGroup());
-                            u.setPersonalEvents(user.getPersonalEvents());
                             return userRepository.save(u);
                         }
                 ).orElseThrow(() -> new UserNotFoundException("User with id " + id + " doesn't exist"));
@@ -65,7 +66,6 @@ public class UserService implements IService<User, Long>, UserDetailsService {
         return userRepository.findByEmail(email);
     }
 
-
     // РЕГИСТРАЦИЯ
 
     public boolean register(User user) {
@@ -77,14 +77,28 @@ public class UserService implements IService<User, Long>, UserDetailsService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("User with email " + username + " doesn't exist"));
+    public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new UsernameNotFoundException("User with email " + email + " doesn't exist"));
 
         return org.springframework.security.core.userdetails.User
                 .withUsername(user.getEmail())
                 .password(user.getPassword())
                 .authorities("USER")
                 .build();
+    }
+
+    // Получение актуального пользователя
+
+    public User getAuthenticatedUser() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String email = authentication.getName();
+
+        var authUser = userRepository.findByEmail(email);
+
+        if (authUser.isPresent()) {
+            return authUser.get();
+        }
+        throw new UserNotFoundException("User doesn't exist");
     }
 }

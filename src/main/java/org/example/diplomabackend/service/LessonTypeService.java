@@ -29,7 +29,6 @@ public class LessonTypeService implements IService<LessonType, Long> {
         return lessonTypeRepository.findById(id).map(
                 lt -> {
                     lt.setName(lessonType.getName());
-                    lt.setLessons(lessonType.getLessons());
                     return lessonTypeRepository.save(lt);
                 }
         ).orElseThrow(() -> new RuntimeException("LessonType with id " + id + " not found"));
