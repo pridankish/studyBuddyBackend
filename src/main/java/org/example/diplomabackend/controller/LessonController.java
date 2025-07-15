@@ -1,5 +1,8 @@
 package org.example.diplomabackend.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.LessonRequestDTO;
 import org.example.diplomabackend.controller.dto.response.LessonResponseDTO;
@@ -18,6 +21,10 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/lessons")
 @CrossOrigin(origins = "*")
+@Tag(
+        name = "Учебные занятия",
+        description = "Методы для работы с учебными занятиями"
+)
 public class LessonController {
     private final LessonService lessonService;
     private final GroupService groupService;
@@ -25,6 +32,7 @@ public class LessonController {
     private final LessonTypeService lessonTypeService;
 
     @GetMapping("/all")
+    @Operation(summary = "Получить все учебные занятия")
     public ResponseEntity<List<LessonResponseDTO>> getAllLessons() {
         return ResponseEntity.ok(
                 lessonService.getAll().stream()
@@ -34,7 +42,9 @@ public class LessonController {
     }
 
     @PostMapping
+    @Operation(summary = "Создать учебное занятие")
     public LessonResponseDTO createLesson(
+            @Parameter(description = "Информация об учебном занятии")
             @RequestBody LessonRequestDTO lessonRequestDTO
     ) {
         var savedLesson = lessonService.addNew(
@@ -52,8 +62,12 @@ public class LessonController {
     }
 
     @PutMapping("/update/{id}")
+    @Operation(summary = "Изменить учебного занятия по её id")
     public LessonResponseDTO updateLesson(
+            @Parameter(description = "Информация об учебном занятии")
             @RequestBody LessonRequestDTO lessonRequestDTO,
+
+            @Parameter(description = "id учебного занятия")
             @PathVariable Long id
     ) {
         var updatedLesson = lessonService.update(
@@ -70,14 +84,18 @@ public class LessonController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Удалить учебного занятия по ее id")
     public void deleteLesson(
+            @Parameter(description = "id учебного занятия")
             @PathVariable Long id
     ) {
         lessonService.delete(id);
     }
 
     @GetMapping("/lesson/{id}")
+    @Operation(summary = "Получить информацию об учебном занятии по ее id")
     public LessonResponseDTO getLessonById(
+            @Parameter(description = "id учебного занятия")
             @PathVariable Long id
     ) {
         return new LessonResponseDTO(lessonService.getById(id));

@@ -13,6 +13,7 @@ spring:
     username: andrejpridankin
     password:
 
+
 #  mail:
 #    username: pridankish101@gmail.com
 #    password: lbjaopcbmieoycsv
@@ -43,3 +44,17 @@ spring:
           timeout: 5000
           writetimeout: 5000
       debug: true
+#  autoconfigure:
+#    exclude: org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfiguration
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui.html
+
+
+logging:
+  level:
+    org:
+      springframework:
+        boot:
+          autoconfigure: DEBUG

@@ -1,5 +1,8 @@
 package org.example.diplomabackend.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.TaskRequestDTO;
 import org.example.diplomabackend.controller.dto.response.TaskResponseDTO;
@@ -16,12 +19,17 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/tasks")
 @CrossOrigin(origins = "*")
+@Tag(
+        name = "Учебные задания",
+        description = "Методы для работы с учебными заданиями"
+)
 public class TaskController {
 
     private final TaskService taskService;
     private final SubjectService subjectService;
 
     @GetMapping("/all")
+    @Operation(summary = "Получить список всех учебных заданий")
     public ResponseEntity<List<TaskResponseDTO>> getAllTasks() {
         return ResponseEntity.ok(
                 taskService.getAll().stream()
@@ -31,7 +39,9 @@ public class TaskController {
     }
 
     @PostMapping
+    @Operation(summary = "Создать учебное задание")
     public TaskResponseDTO createTask(
+            @Parameter(description = "Информация об учебном задании")
             @RequestBody TaskRequestDTO taskRequestDTO
     ) {
         var savedTask = taskService.addNew(
@@ -47,8 +57,12 @@ public class TaskController {
     }
 
     @PutMapping("/update/{id}")
+    @Operation(summary = "Изменить учебное задание по id")
     public TaskResponseDTO updateTask(
+            @Parameter(description = "Информация об учебном задании")
             @RequestBody TaskRequestDTO taskRequestDTO,
+
+            @Parameter(description = "id учебного задания")
             @PathVariable Long id
     ) {
         var updatedTask = taskService.update(
@@ -63,14 +77,18 @@ public class TaskController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Изменить учебное задание по id")
     public void deleteTask(
+            @Parameter(description = "id учебного задания")
             @PathVariable Long id
     ) {
         taskService.delete(id);
     }
 
     @GetMapping("/task/{id}")
+    @Operation(summary = "Удалить учебное задание по id")
     public TaskResponseDTO getTaskById(
+            @Parameter(description = "id учебного задания")
             @PathVariable Long id
     ) {
         return new TaskResponseDTO(taskService.getById(id));

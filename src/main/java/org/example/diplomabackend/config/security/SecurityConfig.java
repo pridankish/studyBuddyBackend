@@ -7,7 +7,6 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.configuration.AuthenticationConfiguration;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -21,7 +20,24 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http, JwtAuthenticationFilter jwtAuthenticationFilter) throws Exception {
         http
-                .csrf(AbstractHttpConfigurer::disable)
+                .csrf(csrf -> csrf.ignoringRequestMatchers(
+                                "/swagger-ui.html",
+                                "/swagger-ui/**",
+                                "/v3/api-docs/**",
+                                "/swagger-resources/**",
+
+                                "/universities/**",
+                                "/groups/**",
+                                "/auth/**",
+                                "/subjects/**",
+                                "/lessons/**",
+                                "/tasks/**",
+                                "/personal-events/**",
+                                "/personal-event-types/**",
+                                "/lesson-types/**",
+                                "/teachers/**"
+                        )
+                )
                 .authorizeHttpRequests(auth -> auth
                     .requestMatchers(
 //                            "/users/**",
@@ -34,7 +50,13 @@ public class SecurityConfig {
                             "/personal-events/**",
                             "/personal-event-types/**",
                             "/lesson-types/**",
-                            "/teachers/**"
+                            "/teachers/**",
+
+                            "/swagger-ui.html",
+                            "/swagger-ui/**",
+                            "/v3/api-docs/**",
+                            "/swagger-resources/**",
+                            "/webjars/**"
                     )
                         .permitAll()
                         .anyRequest().authenticated()

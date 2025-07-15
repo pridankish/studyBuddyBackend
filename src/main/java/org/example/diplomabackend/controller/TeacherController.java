@@ -1,5 +1,8 @@
 package org.example.diplomabackend.controller;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.example.diplomabackend.controller.dto.request.TeacherRequestDTO;
 import org.example.diplomabackend.controller.dto.response.TeacherResponseDTO;
@@ -15,11 +18,16 @@ import java.util.stream.Collectors;
 @RequiredArgsConstructor
 @RequestMapping("/teachers")
 @CrossOrigin(origins = "*")
+@Tag(
+        name = "Преподаватели",
+        description = "Методы для работы с преподавателями"
+)
 public class TeacherController {
 
     private final TeacherService teacherService;
 
     @GetMapping("/all")
+    @Operation(summary = "Получить список преподавателей")
     public ResponseEntity<List<TeacherResponseDTO>> getAllTeachers() {
         return ResponseEntity.ok(
                 teacherService.getAll().stream()
@@ -29,7 +37,9 @@ public class TeacherController {
     }
 
     @PostMapping
+    @Operation(summary = "Создать преподавателя")
     public TeacherResponseDTO createTeacher(
+            @Parameter(description = "Информация о преподавателе")
             @RequestBody TeacherRequestDTO teacherRequestDTO
     ) {
         var savedTeacher = teacherService.addNew(
@@ -43,8 +53,12 @@ public class TeacherController {
     }
 
     @PutMapping("/update/{id}")
+    @Operation(summary = "Изменить преподавателя по его id")
     public TeacherResponseDTO updateTeacher(
+            @Parameter(description = "Информация о преподавателе")
             @RequestBody TeacherRequestDTO teacherRequestDTO,
+
+            @Parameter(description = "id преподавателя")
             @PathVariable Long id
     ) {
         var updatedTeacher = teacherService.update(
@@ -58,14 +72,18 @@ public class TeacherController {
     }
 
     @DeleteMapping("/delete/{id}")
+    @Operation(summary = "Удалить преподавателя по его id")
     public void deleteTeacher(
+            @Parameter(description = "id преподавателя")
             @PathVariable Long id
     ) {
         teacherService.delete(id);
     }
 
     @GetMapping("/teacher/{id}")
+    @Operation(summary = "Получить преподавателя по его id")
     public TeacherResponseDTO getTeacherById(
+            @Parameter(description = "id преподавателя")
             @PathVariable Long id
     ) {
         return new TeacherResponseDTO(teacherService.getById(id));

@@ -1,11 +1,13 @@
 package org.example.diplomabackend.controller;
 
-import lombok.AllArgsConstructor;
-import lombok.Getter;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
-import lombok.Setter;
 import org.example.diplomabackend.config.security.utils.JwtUtil;
+import org.example.diplomabackend.controller.dto.request.LoginRequest;
 import org.example.diplomabackend.controller.dto.request.UserRequestDTO;
+import org.example.diplomabackend.controller.dto.response.TokenResponse;
 import org.example.diplomabackend.entity.User;
 import org.example.diplomabackend.service.GroupService;
 import org.example.diplomabackend.service.UserService;
@@ -21,28 +23,20 @@ import java.time.LocalDateTime;
 @RequiredArgsConstructor
 @RequestMapping("/auth")
 @CrossOrigin(origins = "*")
+@Tag(
+        name = "Регистрация и логин",
+        description = "Методы для регистрации и логина"
+)
 public class AuthController {
-
     private final AuthenticationManager authenticationManager;
     private final JwtUtil jwtUtil;
     private final UserService userService;
     private final GroupService groupService;
 
-    @Getter
-    @Setter
-    static class LoginRequest {
-        private String username;
-        private String password;
-    }
-
-    @Getter
-    @AllArgsConstructor
-    static class TokenResponse {
-        private String token;
-    }
-
     @PostMapping("/login")
+    @Operation(summary = "Логин пользователя")
     public TokenResponse login(
+            @Parameter(description = "Информация о пользователе (имя пользователя и пароль)")
             @RequestBody LoginRequest loginRequest
     ) {
         Authentication authentication = authenticationManager.authenticate(
@@ -53,7 +47,9 @@ public class AuthController {
     }
 
     @PostMapping("/register")
+    @Operation(summary = "Регистрация пользователя")
     public ResponseEntity<String> register(
+            @Parameter(description = "Инормация о пользователе")
             @RequestBody UserRequestDTO userRequestDTO
     ) {
         if (userService.register(
